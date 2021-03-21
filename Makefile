@@ -1,6 +1,3 @@
-# test: RedBlackTree.class
-# 	java -jar junit5.jar -cp . --scan-classpath -n RedBlackTree
-
 test: TestRedBlackTree.class
 	java -jar junit5.jar -cp . --scan-classpath -n TestRedBlackTree
 
