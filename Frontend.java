@@ -21,16 +21,12 @@ public class Frontend{
         while(isBaseMenuRunning){
             printPokedexTitle();
             System.out.println(
-          "g : generation selection mode                         .-----------.\n"
-        + "t : type selection mode                               | Base Mode |\n"
-        + "n : name search mode                                  '-----------'\n"
-        + "p : total power filtering mode\n"
+          "t : type selection mode                               .-----------.\n"
+        + "n : name search mode                                  | Base Mode |\n"
+        + "p : total power filtering mode                        '-----------'\n"
         + "x : exit\n");
             String input = in.next();
             switch(input){
-                case "g":
-                    runGenSelectMode();
-                    break;
                 case "t":
                     runTypeSelectMode();
                     break;
@@ -49,40 +45,6 @@ public class Frontend{
         }
     }
 
-    void runGenSelectMode(){
-        boolean isGenMenuRunning = true;
-        while(isGenMenuRunning){
-            printPokedexTitle();
-            System.out.println(
-              "Type the index of a generation you    .---------------------------.\n"
-            + "would like to select or deselect.     | Generation Selection Mode |\n"
-            + "Only one generation may be selected   '---------------------------'\n"
-            + "at a time. \n\n"
-            + "x : back to menu \n");
-
-            List<Integer> selectedGens = backend.getGenerations();
-            List<Integer> allGens = backend.getAllGenerations();
-            for(Integer gen : allGens){
-                System.out.println(
-                    "GENERATION "+gen+" : " + (selectedGens.contains(gen) ? "SELECTED" : ""));
-            }
-
-            String input = in.next();
-            try{
-                Integer selectedGen = Integer.parseInt(input);
-                if(selectedGens.contains(selectedGen)){
-                    backend.removeGeneration(selectedGen);
-                }else{
-                    backend.addGeneration(selectedGen);
-                }
-            }catch(NumberFormatException ex){
-                if(input.equals("x")){
-                    isGenMenuRunning = false;
-                }
-            }
-        }
-    }
-
     void runTypeSelectMode(){
         boolean isTypeMenuRunning = true;
         while(isTypeMenuRunning){
@@ -94,9 +56,10 @@ public class Frontend{
             
             List<String> selectedTypes = backend.getTypes();
             List<String> allTypes = backend.getAllTypes();
-            for(String type : allTypes){
+            for(int i=0; i<allTypes.size(); i++){
+                String type = allTypes.get(i);
                 System.out.println(
-                    type.toUpperCase() +" : " + (selectedTypes.contains(type) ? "SELECTED" : ""));
+                    i + ") "+(selectedTypes.contains(type) ? "☒ " : "☐ ") + type.toUpperCase());
             }
 
             String input = in.next();
@@ -150,27 +113,19 @@ public class Frontend{
             printPokedexTitle();
             System.out.println(
               "Type the minimum value the hundreds digit .----------------------.\n"
-            + "of total power you want.                  | Power Filtering Mode |\n"
+            + "of combat power you want.                 | Power Filtering Mode |\n"
             + "For example, `2` will select the power    '----------------------'\n"
             + "ranges from 200+.\n"
             + "x : back to menu\n\n");
 
-            System.out.println("SELECTED POWER RANGES : ");
-            List<Integer> selectedPowers = backend.getPowers();
-            for(Integer range : selectedPowers){
-                System.out.println("\t"+(range*100) + " -> "+(range*100+100));
-            }
             String input = in.next();
             try{
                 Integer selectedPower = Integer.parseInt(input);
-                if(selectedPowers.contains(selectedPower)){
-                    backend.removeGeneration(selectedPower);
-                }else{
-                    backend.addGeneration(selectedPower);
-                }
+                backend.filterPower(selectedPower);
+                isPowerMenuRunning = false;
             }catch(NumberFormatException ex){
                 if(input.equals("x")){
-                    isGenMenuRunning = false;
+                    isPowerMenuRunning = false;
                 }
             }
         }
@@ -194,8 +149,6 @@ public class Frontend{
     }
 
     void consoleClear() {  
-        try{
-            Runtime.getRuntime().exec("clear");
-        } catch (Exception e) { System.out.println(e); }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
     }
 }
