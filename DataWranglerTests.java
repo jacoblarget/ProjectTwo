@@ -21,18 +21,18 @@ public class DataWranglerTests {
 		(new DataWranglerTests()).runTests();
 
 		// Console Output Test
-//		PokemonDataReaderInterface reader = new PokemonDataReader();
-//		
-//		try {
+// 		PokemonDataReaderInterface reader = new PokemonDataReader();
+		
+// 		try {
 //      List<PokemonInterface> list = reader.readDataSet(new FileReader("src/updatedPokemon.csv"));
-//      
+     
 //      for(PokemonInterface p: list) {
 //        System.out.println(p);
 //        System.out.println();
 //      }
 //    } 
-//		catch (Exception e) 
-//		{
+// 		catch (Exception e) 
+// 		{
 //      // TODO Auto-generated catch block
 //      e.printStackTrace();
 //    }

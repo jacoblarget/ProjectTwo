@@ -33,12 +33,14 @@ public class Backend implements BackendInterface {
      * @param args The command line arguments that contain the name of the File
      * containing the Pokemon data
      */
-    public Backend (String[] args) {
+    public Backend () {
+    //public Backend (String[] args) {
         // Declare a FileReader to read in the data from the file
         FileReader fileReader;
         try {
             // Initialize fileReader using args
-            fileReader = new FileReader(args[0]);
+            //fileReader = new FileReader(args[0]);
+            fileReader = new FileReader("updatedPokemon.csv");
             
             // Create a PokemonDataReader to read the Pokemon data
             PokemonDataReader pdr = new PokemonDataReader();

@@ -7,7 +7,8 @@ public class Frontend{
     private Scanner in;
 
     public static void main(String args[]){
-        Frontend frontend = new Frontend(new Scanner(System.in), new BackendDummy());
+        Frontend frontend = new Frontend(new Scanner(System.in), new Backend());
+        //Frontend frontend = new Frontend(new Scanner(System.in), new BackendDummy());
         frontend.runBaseMode();
     }
     

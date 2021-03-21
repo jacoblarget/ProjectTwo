@@ -1,14 +1,39 @@
-test: TestRedBlackTree.class
+runAll: runRedBlackTree runBackend
+# runAll: runRedBlackTree runData runFrontend runBackend
+
+runRedBlackTree: compileRedBlackTree
 	java -jar junit5.jar -cp . --scan-classpath -n TestRedBlackTree
 
-TestRedBlackTree.class: TestRedBlackTree.java RedBlackTree.class
+compileRedBlackTree: TestRedBlackTree.java RedBlackTree.java SortedCollectionInterface.java
 	javac -cp .:junit5.jar TestRedBlackTree.java
-
-RedBlackTree.class: RedBlackTree.java SortedCollectionInterface.class
-	javac -cp .:junit5.jar RedBlackTree.java
-
-SortedCollectionInterface.class: SortedCollectionInterface.java
+	javac RedBlackTree.java
 	javac SortedCollectionInterface.java
+
+# runData: compileData
+# 	java -jar junit5.jar -cp . --scan-classpath -n DataWranglerTests
+
+# compileData: DataWranglerTests.java updatedPokemon.csv Pokemon.java PokemonDataReader.java PokemonDataReaderInterface.java PokemonInterface.java
+# 	javac -cp .:junit5.jar DataWranglerTests.java
+# 	javac Pokemon.java
+# 	javac PokemonDataReader.java
+# 	javac PokemonDataReaderInterface.java
+# 	javac PokemonInterface.java
+
+# runFrontend: compileFrontend
+# 	java -jar junit5.jar -cp . --scan-classpath -n FrontEndDeveloperTests
+
+# compileFrontEnd: FrontEndDeveloperTests.java Frontend.java
+# 	javac -cp .:junit5.jar FrontEndDeveloperTests.java
+# 	javac Frontend.java
+
+
+runBackend: compileBackend
+	java -jar junit5.jar -cp . --scan-classpath -n BackEndDeveloperTests
+
+compileBackend: BackEndDeveloperTests.java Backend.java BackendInterface.java
+	javac -cp .:junit5.jar BackEndDeveloperTests.java
+	javac Backend.java
+	javac BackendInterface.java
 
 clean:
 	rm *.class
