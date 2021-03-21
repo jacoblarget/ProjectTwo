@@ -28,18 +28,13 @@ public class Backend implements BackendInterface {
     private int combatPowerFilter; // Filter for combat power
     
     /**
-     * Constructor that takes in a file name from the command line
-     * 
-     * @param args The command line arguments that contain the name of the File
-     * containing the Pokemon data
+     * Default Constructor that accesses the Pokemon csv file
      */
     public Backend () {
-    //public Backend (String[] args) {
         // Declare a FileReader to read in the data from the file
         FileReader fileReader;
         try {
-            // Initialize fileReader using args
-            //fileReader = new FileReader(args[0]);
+            // Initialize fileReader using updatedPokemon.csv
             fileReader = new FileReader("updatedPokemon.csv");
             
             // Create a PokemonDataReader to read the Pokemon data
@@ -49,7 +44,7 @@ public class Backend implements BackendInterface {
                 // Try to read the data set using the PokemonDataReader
                 List<PokemonInterface> pokemonList = pdr.readDataSet(fileReader);
                 // Use the data to populate the RedBlackTree
-                initializeBackend(pokemonList);
+                initializeTreeSelection(pokemonList);
             } catch (IOException ioe) {
                 System.out.println("IO Exception Thrown in Constructor:");
                 ioe.printStackTrace();
@@ -58,8 +53,7 @@ public class Backend implements BackendInterface {
                 dfe.printStackTrace();
             }
         } catch (FileNotFoundException fnfe) {
-            System.out.println("File Not Found:");
-            fnfe.printStackTrace();
+            System.out.println("updatedPokemon.csv File Not Found:");
         }
     }
 
@@ -77,7 +71,7 @@ public class Backend implements BackendInterface {
             // Try to read the data set using the PokemonDataReader
             List<PokemonInterface> pokemonList = pdr.readDataSet(pokemonReader);
             // Use the data to populate the RedBlackTree
-            initializeBackend(pokemonList);
+            initializeTreeSelection(pokemonList);
         } catch (IOException ioe) {
             System.out.println("IO Exception Thrown in Constructor:");
             ioe.printStackTrace();
@@ -93,20 +87,20 @@ public class Backend implements BackendInterface {
      * 
      * @param pokemonList The List of Pokemon generated in the constructor
      */
-    private void initializeBackend(List<PokemonInterface> pokemonList) {
+    private void initializeTreeSelection(List<PokemonInterface> pokemonList) {
         //Initialize instance variables
         this.pokemonTree = new RedBlackTree<PokemonInterface>();
         this.filteredPokemon = new ArrayList<PokemonInterface>();
-
-        for(PokemonInterface pokemon : pokemonList) {
-            this.pokemonTree.insert(pokemon); // add each Pokemon to the RBT
-        }
 
         // Initialize the active types to an empty ArrayList (no types selected)
         this.activeTypes = new ArrayList<String>();
         
         // Initialize the minimum combat power filter to 0 (all Pokemon eligible)
         this.combatPowerFilter = 0; 
+        
+        for(PokemonInterface pokemon : pokemonList) {
+            this.pokemonTree.insert(pokemon); // add each Pokemon to the RBT
+        }
     }
 
     /**
@@ -132,23 +126,23 @@ public class Backend implements BackendInterface {
     }
 
     /**
-     * Helper method that determines whether the provided List of types matches
+     * Helper method that determines whether the provided List of types contains
      * the current selected types
      * 
      * @param types The List of types being checked
-     * @return True if the List of types matches the list of selected types,
+     * @return True if the List of types fits the list of selected types,
      * false otherwise
      */
     private boolean checkTypes(List<String> types) {
         for(int i = 0; i < this.activeTypes.size(); i++) {
             if(!types.contains(this.activeTypes.get(i))) {
                 // if there is an active type that the List does not have,
-                // then the List's types do not match the selection
+                // then the List's types do not fit the selection
                 return false;
             }
         }
 
-        // If the list of types has all of the active types, then the types match
+        // If the list of types has all of the active types, then the types fit
         return true;
     }
 
@@ -227,9 +221,6 @@ public class Backend implements BackendInterface {
     public List<String> getTypes() {
         return this.activeTypes;
     }
-
-    // Returns a list of Pokemon that fit the type
-    // and combat power filters
     
     /**
      * Returns a list of Pokemon that fit the type and combat power filters
