@@ -11,70 +11,24 @@ import java.io.FileReader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+@SuppressWarnings("unused")
 public class DataWranglerTests {
 	
 	public static void main(String[] args){
 		(new DataWranglerTests()).runTests();
-
-		// Console Output Test
-// 		PokemonDataReaderInterface reader = new PokemonDataReader();
-		
-// 		try {
-//      List<PokemonInterface> list = reader.readDataSet(new FileReader("src/updatedPokemon.csv"));
-     
-//      for(PokemonInterface p: list) {
-//        System.out.println(p);
-//        System.out.println();
-//      }
-//    } 
-// 		catch (Exception e) 
-// 		{
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
 	}
 	
 	// Tests will run as JUnit Tests, as well as return a boolean and print to the console
 	public void runTests(){
-
-		if(this.testPokemonConstructor()) {
-			System.out.println("Test Pokemon Constructor: PASSED");
-		}
-		else{
-			System.out.println("Test Pokemon Constructor: FAILED");
-		}
-
-		if(this.testPokemonGetters()) {
-			System.out.println("Test Pokemon Getters: PASSED");
-		}
-		else{
-			System.out.println("Test Pokemon Getters: FAILED");
-		}
-
-		if(this.testPokemonReaderConstructor()) {
-			System.out.println("Test Pokemon Reader Constructor: PASSED");
-		}
-		else{
-			System.out.println("Test Pokemon Reader Constructor: FAILED");
-		}
-
-		if(this.testPokemonReaderListSize()) {
-			System.out.println("Test Pokemon Reader List size: PASSED");
-		}
-		else{
-			System.out.println("Test Pokemon Reader List size: FAILED");
-		}
-
-		if(this.testPokemonReaderReadDataSet()) {
-			System.out.println("Test Pokemon Reader Expected List from readDataSet(): PASSED");
-		}
-		else{
-			System.out.println("Test Pokemon Reader Expected List from readDataSet(): FAILED");
-		}
+	  this.testPokemonGetters();
+	  this.testPokemonReaderConstructor();
+	  this.testPokemonReaderListSize();
+	  this.testPokemonReaderReadDataSet();
 	}
 
 	// Tests implemented below
@@ -85,9 +39,8 @@ public class DataWranglerTests {
 	 * This test instantiates a Pokemon object to make sure the constructor functions
 	 * as expected. It passes when the object is initialized with its fields set to the
 	 * correct values, and fails otherwise.
-	 * @return true if test passed, false otherwise
 	 */
-	public boolean testPokemonConstructor(){
+	public void testPokemonConstructor(){
 		try{
 			String name = "Bulbasaur";
 			int number = 1;
@@ -103,19 +56,12 @@ public class DataWranglerTests {
 
 			PokemonInterface testPokemon = new Pokemon(name, number, types, combatPower, hp, atk, def, spd, gen, legendary);
 			
-			if(testPokemon != null){
-				return true;
-			}
-			else{
-				fail("No Pokemon object instantiated.");
-				return false;
-			}
+			assertFalse(testPokemon == null);
 		}
 		catch(Exception e){
 			System.out.println("An unexpected exception was thrown, test failed.");
 			e.printStackTrace();
 			fail("Unexpected exception");
-			return false;
 		}
 	}
 
@@ -124,9 +70,8 @@ public class DataWranglerTests {
 	 * After above test verifies that constructor does not cause issues,
 	 * this test verifies that the Pokemon object getters will properly return
 	 * the values the constructor placed in that Pokemon object's fields.
-	 * @return true is test passes, false otherwise
 	 */
-	public boolean testPokemonGetters(){
+	public void testPokemonGetters(){
 		try{
 			String name = "Bulbasaur";
 			int number = 1;
@@ -142,7 +87,7 @@ public class DataWranglerTests {
 
 			PokemonInterface testPokemon = new Pokemon(name, number, types, combatPower, hp, atk, def, spd, gen, legendary);
 		
-			if(
+			assertFalse(
 				!testPokemon.getName().equals("Bulbasaur") ||
 				(testPokemon.getNumber() != 1) ||	
 				(testPokemon.getTotalCombatPower() != 318) ||	
@@ -153,20 +98,12 @@ public class DataWranglerTests {
 				(testPokemon.getGeneration() != 1) ||	
 				(testPokemon.getIsLegendary() != false) ||	
 				!testPokemon.getTypes().contains("Grass") ||
-				!testPokemon.getTypes().contains("Poison")
-			  ){
-				fail("Getter failed to properly retrieve Pokemon info.");
-				return false;
-			  }
-			else{
-				return true;
-			}	
+				!testPokemon.getTypes().contains("Poison"));
 		}
 		catch(Exception e){
 			System.out.println("An unexpected exception was thrown, test failed.");
 			e.printStackTrace();
 			fail("Unexpected exception");
-			return false;
 		}
 	}
 
@@ -174,9 +111,8 @@ public class DataWranglerTests {
 	/**
 	 * Tests the Reader classes readDataSet() method to verify it properly
 	 * takes a StringReader or FileReader and returns a List of Pokemon.
-	 * @return true if test passes, false otherwise
 	 */
-	public boolean testPokemonReaderReadDataSet(){
+	public void testPokemonReaderReadDataSet(){
 		try{
 			PokemonDataReaderInterface dataReader = new PokemonDataReader();
 
@@ -189,34 +125,27 @@ public class DataWranglerTests {
 				)		
 			);
 
-			if(
+			assertFalse(
 				!pokemonList.get(0).getName().equals("Bulbasaur") ||
 				!pokemonList.get(1).getName().equals("Ivysaur") ||
 				!pokemonList.get(2).getName().equals("Venusaur") ||
 				(pokemonList.get(0).getHP() != 45) ||
 				(pokemonList.get(1).getHP() != 60) ||
 				(pokemonList.get(2).getHP() != 80)
-			){
-				fail("DataReader.readDataSet() not able to retrieve info from CSV format.");
-				return false;	
-			}
-
-			return true;
+			);
 		}
 		catch(Exception e){
 			System.out.println("An unexpected exception was thrown, test failed.");
 			e.printStackTrace();
 			fail("Unexpected exception");
-			return false;
 		}
 	}
 
 	@Test
 	/**
 	 * Tests that the readDataSet method returns an appropriately sized list of Pokemon objects.
-	 * @return true if test passes, false otherwise
 	 */
-	public boolean testPokemonReaderListSize(){
+	public void testPokemonReaderListSize(){
 		try{
 			PokemonDataReaderInterface dataReader = new PokemonDataReader();
 
@@ -244,22 +173,16 @@ public class DataWranglerTests {
 				)		
 			);
 			
-			if(
+			assertFalse(
 				(pokemonListLen1.size() != 1) ||
 				(pokemonListLen2.size() != 2) ||
 				(pokemonListLen3.size() != 3)
-			){
-				fail("DataReader.readDataSet() not returning list of correct size.");
-				return false;	
-			}
-
-			return true;
+			);
 		}
 		catch(Exception e){
 			System.out.println("An unexpected exception was thrown, test failed.");
 			e.printStackTrace();
 			fail("Unexpected exception");
-			return false;
 		}
 	}
 
@@ -269,23 +192,16 @@ public class DataWranglerTests {
 	 * without throwing excecptions
 	 * @return true if test passes, false otherwise
 	 */
-	public boolean testPokemonReaderConstructor(){
+	public void testPokemonReaderConstructor(){
 		try{
 			PokemonDataReaderInterface dataReader = new PokemonDataReader();
 
-			if(dataReader instanceof PokemonDataReaderInterface){
-				return true;
-			}
-			else{
-				fail("Failed to correctly create PokemonDataReader.");
-				return false;
-			}
+			assertTrue(dataReader instanceof PokemonDataReaderInterface);
 		}
 		catch(Exception e){
 			System.out.println("An unexpected exception was thrown, test failed.");
 			e.printStackTrace();
 			fail("Unexpected exception");
-			return false;
 		}
 	}
 

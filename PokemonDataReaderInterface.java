@@ -16,4 +16,7 @@ public interface PokemonDataReaderInterface {
   public List<PokemonInterface> readDataSet(Reader inputFileReader)
       throws IOException, DataFormatException;
   
+  public List<PokemonInterface> readDataSet(Reader inputFileReadern, int stopGeneration)
+      throws IOException, DataFormatException;
+  
 }
