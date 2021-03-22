@@ -5,6 +5,7 @@ public class Frontend{
     //m(enu) g(eneration), t(ype), n(ame), p(ower), (e)x(it)
     private BackendInterface backend;
     private Scanner in;
+    public int currentMinPower;
 
     public static void main(String args[]){
         Frontend frontend = new Frontend(new Scanner(System.in), new BackendDummy());
@@ -14,6 +15,7 @@ public class Frontend{
     public Frontend(Scanner in, BackendInterface backend){
         this.in = in;
         this.backend = backend;
+        this.currentMinPower = 0;
     }
 
     void runBaseMode(){
@@ -25,6 +27,18 @@ public class Frontend{
         + "n : name search mode                                  | Base Mode |\n"
         + "p : total power filtering mode                        '-----------'\n"
         + "x : exit\n");
+            
+            List<PokemonInterface> filteredPokemon = backend.getFilteredPokemon();
+            for(int i=0; i<5 && i<filteredPokemon.size(); i++){
+                System.out.println((i+1)+") "+filteredPokemon.get(i));
+            }
+            if(filteredPokemon.size() > 5){
+                System.out.println("...");
+                for(int i=filteredPokemon.size()-1; i>filteredPokemon.size()-7 && i>5; i--){
+                    System.out.println(i+") "+filteredPokemon.get(i));
+                }
+            }
+
             String input = in.next();
             switch(input){
                 case "t":
@@ -116,13 +130,14 @@ public class Frontend{
             + "of combat power you want.                 | Power Filtering Mode |\n"
             + "For example, `2` will select the power    '----------------------'\n"
             + "ranges from 200+.\n"
+            + "CURRENT MINIMUM : "+(currentMinPower*100)+"\n"
             + "x : back to menu\n\n");
 
             String input = in.next();
             try{
                 Integer selectedPower = Integer.parseInt(input);
+                currentMinPower = selectedPower;
                 backend.filterPower(selectedPower);
-                isPowerMenuRunning = false;
             }catch(NumberFormatException ex){
                 if(input.equals("x")){
                     isPowerMenuRunning = false;
