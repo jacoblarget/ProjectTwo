@@ -122,7 +122,7 @@ public class Frontend{
         if(filteredPokemon.size() > 5){
             output += "...\n";
             for(int i=Math.max(filteredPokemon.size()-6, 5); i<filteredPokemon.size(); i++){
-                output += (i+") "+filteredPokemon.get(i).getName() + "\n");
+                output += (i+1)+") "+filteredPokemon.get(i).getName() + "\n";
             }
         }
         return output;
