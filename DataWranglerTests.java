@@ -21,7 +21,6 @@ public class DataWranglerTests {
 	
 	public static void main(String[] args){
 		(new DataWranglerTests()).runTests();
-		
 	}
 	
 	// Tests will run as JUnit Tests, as well as return a boolean and print to the console
