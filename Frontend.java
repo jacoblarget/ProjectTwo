@@ -10,7 +10,7 @@ public class Frontend{
     private String currentMode;
 
     public static void main(String args[]){
-        Frontend frontend = new Frontend(new BackendDummy(args[0]));
+        Frontend frontend = new Frontend(new Backend(args[0]));
         Scanner sc = new Scanner(System.in);
         while(frontend.currentMode != null){
             consoleClear();
