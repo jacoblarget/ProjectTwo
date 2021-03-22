@@ -25,21 +25,4 @@ public interface PokemonInterface extends Comparable<PokemonInterface> {
   // from super interface Comparable
   // Compares two Pokemon by TotalCombatPower
   public int compareTo (PokemonInterface otherPokemon);
-  
-  // Compares the Pokedex number of two Pokemon
-  public int compareNum(PokemonInterface otherPokemon);
-
-  //Compares two Pokemon by TotalCombatPower
-  public int compareHP (PokemonInterface otherPokemon);
-
-  //Compares two Pokemon by TotalCombatPower
-  public int compareAttack (PokemonInterface otherPokemon);
-
-  //Compares two Pokemon by TotalCombatPower
-  public int compareDefense (PokemonInterface otherPokemon);
-
-  //Compares two Pokemon by TotalCombatPower
-  public int compareSpeed (PokemonInterface otherPokemon);
-  
-  
 }
