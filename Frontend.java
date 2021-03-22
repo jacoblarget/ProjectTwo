@@ -145,11 +145,11 @@ public class Frontend{
         if(currentSearchInput == null) return "";
 
         String output = "";
-        PokemonInterface pokemon = backend.getByName(currentSearchInput);
-        if(pokemon == null){
-            output += "No pokemon with the name "+currentSearchInput+" found.";
-        }else{
+        try{
+            PokemonInterface pokemon = backend.getByName(currentSearchInput);
             output += pokemon;
+        }catch(Exception ex){
+            output += "No pokemon with the name "+currentSearchInput+" found.";
         }
         return output;
     }
