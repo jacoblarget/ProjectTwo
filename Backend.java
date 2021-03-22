@@ -29,13 +29,15 @@ public class Backend implements BackendInterface {
     
     /**
      * Default Constructor that accesses the Pokemon csv file
+     * 
+     * @param fileName The name of the Pokemon CSV file
      */
-    public Backend () {
+    public Backend (String fileName) {
         // Declare a FileReader to read in the data from the file
         FileReader fileReader;
         try {
-            // Initialize fileReader using updatedPokemon.csv
-            fileReader = new FileReader("updatedPokemon.csv");
+            // Initialize fileReader using file name
+            fileReader = new FileReader(fileName);
             
             // Create a PokemonDataReader to read the Pokemon data
             PokemonDataReader pdr = new PokemonDataReader();
@@ -201,13 +203,13 @@ public class Backend implements BackendInterface {
     }
 
     /**
-     * Sets a filter such that only Pokemon with a combat power >= minimum are selected
+     * Sets a filter such that only Pokemon with a combat power >= 100 * minimum are selected
      * 
-     * @param minimum The combat power filter value
+     * @param minimum The combat power filter value divided by 100
      */
     public void filterPower(int minimum) {
         // Set the combat power filter
-        this.combatPowerFilter = minimum;
+        this.combatPowerFilter = 100 * minimum;
 
         // Update the filtered Pokemon
         this.updateFilteredPokemon();
