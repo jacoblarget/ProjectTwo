@@ -3,6 +3,7 @@ BackEndDeveloper README for Project Two (CS400 @ UW Madison)
 
 Name of BackEndDeveloper: Vatsal Patel
 @wisc.edu Email of BackEndDeveloper: vpatel43@wisc.edu
+Group: jd
 Team: Blue
 
 Files Written by Me:

@@ -8,7 +8,6 @@ public class Frontend{
 
     public static void main(String args[]){
         Frontend frontend = new Frontend(new Scanner(System.in), new Backend());
-        //Frontend frontend = new Frontend(new Scanner(System.in), new BackendDummy());
         frontend.runBaseMode();
     }
     
@@ -134,12 +133,13 @@ public class Frontend{
 
     void printPokedexTitle(){ 
         consoleClear();
+        String ANSI_WHITE_BACKGROUND = "\u001B[47m";
         String ANSI_BLACK = "\u001B[30m";
         String ANSI_RED = "\u001B[31m";
         String ANSI_RESET = "\u001B[0m";
         System.out.println(
       "                ▀▄▀▄▀▄ Pokémon™: "+ANSI_RED+"Red"+ANSI_RESET+" & "
-        + ANSI_BLACK+"Black"+ANSI_RESET+" ▄█▄▀▄▀\n"
+        + ANSI_WHITE_BACKGROUND + ANSI_BLACK+"Black"+ANSI_RESET+" ▄█▄▀▄▀\n"
         + " ▀███▀▀▀██▄         ▀███                    ▀███\n"
         + "  ██   ▀██▄          ██                      ██\n"
         + "  ██   ▄██  ▄██▀██▄  ██  ▄██▀  ▄▄█▀██   ▄█▀▀███   ▄▄█▀██▀██▀   ▀██▀\n"

@@ -101,9 +101,10 @@ public class RedBlackTree<T extends Comparable<T>> implements SortedCollectionIn
         if(root == null) { root = newNode; size++; return true; } // add first node to an empty tree
         else{
             boolean returnValue = insertHelper(newNode,root); // recursively insert into subtree
-            if (returnValue) size++;
-	    else throw new IllegalArgumentException(
-	    	"This RedBlackTree already contains that value.");
+            size++;
+        //     if (returnValue) size++;
+	    // else throw new IllegalArgumentException(
+	    // 	"This RedBlackTree already contains that value.");
             root.isBlack = true;
             return returnValue;
         }
@@ -192,7 +193,7 @@ public class RedBlackTree<T extends Comparable<T>> implements SortedCollectionIn
                     newNode.parent.isBlack = true;
                     newNode.parent.parent.isBlack = false;
                     // only set if node exists, null always treated black
-                    if(newNode.parent.parent != null) newNode.parent.parent.leftChild.isBlack = true;
+                    if(newNode.parent.parent.leftChild != null) newNode.parent.parent.leftChild.isBlack = true;
                     // try on grandparent
                     enforceRBTreePropertiesAfterInsert(newNode.parent.parent);
                 } else {
