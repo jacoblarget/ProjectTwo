@@ -1,4 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,17 +22,20 @@ public class FrontEndDeveloperTests {
     @Test
     void TestNameSelection(){
         frontend.processInput("n");
-        assertEquals(frontend.isRunning(), false);
+        frontend.processInput("");
+        assertEquals(frontend.getCurrentOutputText(), "No pokemon with the name  found.");
     }
 
     @Test
     void TestGenSelection(){
-	fail("Gen selection not implemented");
     }
 
     @Test
     void TestTypeSelection(){
-	fail("Type selection not implemented");
+        frontend.processInput("t");
+        frontend.processInput("0");
+        String type = frontend.getBackend().getTypes().get(0);
+        assertEquals(type, "NORMAL");
     }
     
     @Test

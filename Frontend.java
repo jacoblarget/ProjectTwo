@@ -117,12 +117,12 @@ public class Frontend{
         //add current filtered pokemon to output
         List<PokemonInterface> filteredPokemon = backend.getFilteredPokemon();
         for(int i=0; i<5 && i<filteredPokemon.size(); i++){
-            output += ((i+1)+") "+filteredPokemon.get(i));
+            output += ((i+1)+") "+filteredPokemon.get(i).getName() + "\n");
         }
         if(filteredPokemon.size() > 5){
-            output += "...";
-            for(int i=filteredPokemon.size()-1; i>filteredPokemon.size()-7 && i>5; i--){
-                output += (i+") "+filteredPokemon.get(i));
+            output += "...\n";
+            for(int i=Math.max(filteredPokemon.size()-6, 5); i<filteredPokemon.size(); i++){
+                output += (i+") "+filteredPokemon.get(i).getName() + "\n");
             }
         }
         return output;
@@ -135,7 +135,7 @@ public class Frontend{
         for(int i=0; i<allTypes.size(); i++){
             String type = allTypes.get(i);
             output +=
-                i + ") "+(selectedTypes.contains(type) ? "☒ " : "☐ ") + 
+                i + ") "+(selectedTypes.contains(type) ? "X " : "_") + 
                 type.toUpperCase() + "\n";
         }
         return output;
@@ -175,7 +175,7 @@ public class Frontend{
 
     void processTypeInput(String input){
         List<String> allTypes = backend.getAllTypes();
-        List<String> selectedTypes = backend.getAllTypes();
+        List<String> selectedTypes = backend.getTypes();
         try{
             Integer selectedTypeIndex = Integer.parseInt(input);
             if(selectedTypeIndex < allTypes.size() && selectedTypeIndex >= 0){
@@ -227,5 +227,9 @@ public class Frontend{
         + "  ██       ██     ██ ██▄██    ██▀▀▀▀▀▀███    ██  ██▀▀▀▀▀▀   ███\n"
         + "  ██       ██▄   ▄██ ██ ▀██▄  ██▄    ▄▀██    ██  ██▄    ▄ ▄█▀ ██▄\n"
         + "▄████▄      ▀█████▀▄████▄ ██▄▄ ▀█████▀ ▀████▀███▄ ▀█████▀██▄   ▄██▄\n";
+    }
+
+    public BackendInterface getBackend(){
+        return backend;
     }
 }
