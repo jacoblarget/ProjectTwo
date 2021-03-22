@@ -200,7 +200,7 @@ public class Frontend{
             currentSearchInput = input;
         }
     }
-
+  
     void processPowerInput(String input){
         try{
             Integer selectedPower = Integer.parseInt(input);
