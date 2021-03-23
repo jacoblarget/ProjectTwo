@@ -92,7 +92,6 @@ public class Pokemon implements PokemonInterface {
     return isLegendary;
   }
 
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * totalCombatPower fields. Returns an integer difference.
@@ -106,7 +105,6 @@ public class Pokemon implements PokemonInterface {
     return (this.totalCombatPower - otherPokemon.getTotalCombatPower());
   }
   
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * number fields. Returns an integer difference.
@@ -116,11 +114,10 @@ public class Pokemon implements PokemonInterface {
    * If return value is negative, this Pokemon has a lower number
    * If return value is zero, the two Pokemon are the same Pokemon (the same Pokedex number)
    */
-  public int compareNum(PokemonInterface otherPokemon) {
+  public int compareNum(Pokemon otherPokemon) {
     return (this.number - otherPokemon.getNumber());
   }
 
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * hp fields. Returns an integer difference.
@@ -130,11 +127,10 @@ public class Pokemon implements PokemonInterface {
    * If return value is negative, this Pokemon has a lower stat value
    * If return value is zero, the two Pokemon have equal stat values
    */
-  public int compareHP(PokemonInterface otherPokemon) {
+  public int compareHP(Pokemon otherPokemon) {
     return (this.hp - otherPokemon.getHP());
   }
 
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * attack fields. Returns an integer difference.
@@ -144,11 +140,10 @@ public class Pokemon implements PokemonInterface {
    * If return value is negative, this Pokemon has a lower stat value
    * If return value is zero, the two Pokemon have equal stat values
    */
-  public int compareAttack(PokemonInterface otherPokemon) {
+  public int compareAttack(Pokemon otherPokemon) {
     return (this.attack - otherPokemon.getAttack());
   }
 
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * defense fields. Returns an integer difference.
@@ -158,11 +153,10 @@ public class Pokemon implements PokemonInterface {
    * If return value is negative, this Pokemon has a lower stat value
    * If return value is zero, the two Pokemon have equal stat values
    */
-  public int compareDefense(PokemonInterface otherPokemon) {
+  public int compareDefense(Pokemon otherPokemon) {
     return (this.defense - otherPokemon.getDefense());
   }
 
-  @Override
   /**
    * Compares this Pokemon object to another Pokemon based on their
    * speed fields. Returns an integer difference.
@@ -172,7 +166,7 @@ public class Pokemon implements PokemonInterface {
    * If return value is negative, this Pokemon has a lower stat value
    * If return value is zero, the two Pokemon have equal stat values
    */
-  public int compareSpeed(PokemonInterface otherPokemon) {
+  public int compareSpeed(Pokemon otherPokemon) {
     return (this.speed - otherPokemon.getSpeed());
   }
   
