@@ -26,4 +26,6 @@ Signature:
  example: work reused from a previous semester, code examples taken from any 
  website or book, or anything that was not explicitly authored by you for
  the purpose of completing this assigned CS400 project.>
+
+ Guilhem Ane
  
