@@ -10,7 +10,7 @@ public class Frontend{
     private String currentMode;
 
     public static void main(String args[]){
-        Frontend frontend = new Frontend(new BackendDummy(args[0]));
+        Frontend frontend = new Frontend(new Backend(args[0]));
         Scanner sc = new Scanner(System.in);
         while(frontend.currentMode != null){
             consoleClear();
@@ -145,11 +145,11 @@ public class Frontend{
         if(currentSearchInput == null) return "";
 
         String output = "";
-        PokemonInterface pokemon = backend.getByName(currentSearchInput);
-        if(pokemon == null){
-            output += "No pokemon with the name "+currentSearchInput+" found.";
-        }else{
+        try{
+            PokemonInterface pokemon = backend.getByName(currentSearchInput);
             output += pokemon;
+        }catch(Exception ex){
+            output += "No pokemon with the name "+currentSearchInput+" found.";
         }
         return output;
     }
