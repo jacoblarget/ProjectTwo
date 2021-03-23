@@ -1,20 +1,20 @@
 # runAll: runRedBlackTree runData runFrontEnd runBackEnd
 # runAll: runRedBlackTree runData runBackEnd
 run: compile
-	java Frontend
+	java Frontend updatedPokemon.csv
 
 compile:
 	# javac -cp .:junit5.jar RedBlackTreeTests.java
 	javac RedBlackTree.java
 	javac SortedCollectionInterface.java
-	javac -cp .:junit5.jar DataWranglerTests.java
+	# javac -cp .:junit5.jar DataWranglerTests.java
 	javac Pokemon.java
 	javac PokemonDataReader.java
 	javac PokemonDataReaderInterface.java
 	javac PokemonInterface.java
-	# javac -cp .:junit5.jar FrontEndDeveloperTests.java
+	javac -cp .:junit5.jar FrontEndDeveloperTests.java
 	javac Frontend.java
-	javac -cp .:junit5.jar BackEndDeveloperTests.java
+	# javac -cp .:junit5.jar BackEndDeveloperTests.java
 	javac Backend.java
 	javac BackendInterface.java
 

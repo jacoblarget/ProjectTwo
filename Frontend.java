@@ -1,6 +1,15 @@
 import java.util.Scanner;
 import java.util.List;
 
+// --== CS400 File Header Information ==--
+// Name: Guilhem Ane
+// Email: gane@wisc.edu
+// Team: Blue Team
+// Group: JD
+// TA: Xinyi
+// Lecturer: Florian Heimerl
+// Notes to Grader: 
+
 public class Frontend{
     private BackendInterface backend;
     private Scanner in;
@@ -21,10 +30,17 @@ public class Frontend{
         }
     }
 
+    /**
+     * Clears the console by adding many new lines
+     */
     static void consoleClear() {  
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
     }
     
+
+    /**
+     * Initializes a new Frontend object
+     */
     public Frontend(BackendInterface backend){
         this.backend = backend;
         this.currentMinPower = 0;
@@ -32,10 +48,17 @@ public class Frontend{
         this.currentMode = "b";
     }
     
+    /**
+     * @return true if the frontend is in any of the valid modes, 
+     *      false if the frontend is in `null` mode
+     */
     boolean isRunning(){
-        return currentMode == null;
+        return currentMode != null;
     }
 
+    /**
+     * Returns the instructions for the current mode
+     */
     public String getCurrentInfoText(){
         switch(currentMode){
             case "b":
@@ -50,6 +73,9 @@ public class Frontend{
         return "";
     }
 
+    /**
+     * Returns the output for the current mode
+     */
     public String getCurrentOutputText(){
         switch(currentMode){
             case "b":
@@ -63,7 +89,10 @@ public class Frontend{
         }
         return "";
     }
-    
+
+    /**
+     * Processes any input for the current mode
+     */
     public void processInput(String input){
         switch(currentMode){
             case "b":
@@ -81,6 +110,9 @@ public class Frontend{
         }
     }
 
+    /**
+     * @return instructions for the base mode
+     */
     String getBaseModeInfo(){
         return
           "t : type selection mode                               .-----------.\n"
@@ -89,6 +121,9 @@ public class Frontend{
         + "x : exit\n";
     }
 
+    /**
+     * @return instructions for the type selection mode
+     */
     String getTypeModeInfo(){
         return
           "Type the index of a type you would like     .---------------------.\n"
@@ -96,6 +131,9 @@ public class Frontend{
         + "x : back to main menu                       '---------------------'\n";
     }
 
+    /**
+     * @return instructions for the name search mode
+     */
     String getNameModeInfo(){
         return 
           "Type a name or partial name to search       .---------------------.\n"
@@ -103,6 +141,9 @@ public class Frontend{
         + "x : back to main menu                       '---------------------'\n";
     }
 
+    /**
+     * @return instructions for the power filtering mode
+     */
     String getPowerModeInfo(){
         return 
           "Type the minimum value the hundreds digit .----------------------.\n"
@@ -112,6 +153,9 @@ public class Frontend{
         + "x : back to menu\n";
     }
 
+    /**
+     * @return the top five and bottom five pokemon as a String
+     */
     String getTopBottomFivePokemon(){
         String output = "";
         //add current filtered pokemon to output
@@ -128,6 +172,9 @@ public class Frontend{
         return output;
     }
 
+    /**
+     * @return a list of the selected and unselected types as a single String
+     */
     String getTypeSelectionOutput(){
         String output = "";
         List<String> selectedTypes = backend.getTypes();
@@ -141,6 +188,9 @@ public class Frontend{
         return output;
     }
 
+    /**
+     * @return the output given by searching for any Pokemon's name
+     */
     String getNameSelectionOutput(){
         if(currentSearchInput == null) return "";
 
@@ -154,11 +204,17 @@ public class Frontend{
         return output;
     }
 
+    /**
+     * @return the the current combat power filter minimum as a pretty String
+     */
     String getPowerSelectionOutput(){
         return 
             "CURRENT MINIMUM : "+(currentMinPower*100)+"\n";
     }
 
+    /**
+     * Processes the input for the base mode
+     */
     void processBaseInput(String input){
         switch(input){
             case "n":
@@ -173,6 +229,9 @@ public class Frontend{
         }
     }
 
+    /**
+     * Processes the input for the type selection mode
+     */
     void processTypeInput(String input){
         List<String> allTypes = backend.getAllTypes();
         List<String> selectedTypes = backend.getTypes();
@@ -193,6 +252,9 @@ public class Frontend{
         }
     }
 
+    /**
+     * Processes the input for the name selection mode
+     */
     void processNameInput(String input){
         if(input.equals("x")){
             currentMode = "b";
@@ -201,6 +263,9 @@ public class Frontend{
         }
     }
   
+    /**
+     * Processes the input for the power filtering mode
+     */
     void processPowerInput(String input){
         try{
             Integer selectedPower = Integer.parseInt(input);
@@ -213,6 +278,9 @@ public class Frontend{
         }
     }
 
+    /**
+     * @return the Pokemon title text
+     */
     String getPokedexTitle(){ 
         String ANSI_BLACK = "\u001B[30m";
         String ANSI_RED = "\u001B[31m";
@@ -229,7 +297,17 @@ public class Frontend{
         + "▄████▄      ▀█████▀▄████▄ ██▄▄ ▀█████▀ ▀████▀███▄ ▀█████▀██▄   ▄██▄\n";
     }
 
+    /**
+     * @return the Backend object for testing
+     */
     public BackendInterface getBackend(){
         return backend;
+    }
+
+    /**
+     * @return the minimum power for testing
+     */
+    public int getMinPower(){
+        return currentMinPower;
     }
 }
