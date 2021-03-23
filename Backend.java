@@ -17,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Backend implements BackendInterface {
     private RedBlackTree<PokemonInterface> pokemonTree; // The Tree of all the Pokemon
@@ -243,12 +245,14 @@ public class Backend implements BackendInterface {
      * 
      */
     public Pokemon getByName(String name) throws NoSuchElementException {
-        String adjustedName = name.toLowerCase().strip();
+        String adjustedName = name.strip();
+        Pattern namePattern = Pattern.compile(adjustedName, Pattern.CASE_INSENSITIVE);
+
         for(PokemonInterface pokemon : this.filteredPokemon) {
-            String pokemonName = pokemon.getName().toLowerCase().strip();
-            
+            Matcher matcher = namePattern.matcher(pokemon.getName());
+
             // If the input is equal to the current Pokemon's name, return the Pokemon
-            if(adjustedName.equals(pokemonName)) {
+            if(matcher.find()) {
                 return (Pokemon) pokemon;
             }
         }
